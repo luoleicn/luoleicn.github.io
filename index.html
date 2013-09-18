@@ -1,8 +1,20 @@
 ---
-layout: default
-title: My Blog
+layout: none
+title: ²©¿ÍÊ×Ò³
 ---
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>{{ page.title }}</title>
+</head>
+<body>
+
 <h2>{{ page.title }}</h2>
+
 <p><a href="http://luoleicn.github.io/blog/feed.xml">rss</a></p>
 <p>recent posts</p>
 <ul>
@@ -10,3 +22,6 @@ title: My Blog
 <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
 </ul>
+
+</body>
+</html>
