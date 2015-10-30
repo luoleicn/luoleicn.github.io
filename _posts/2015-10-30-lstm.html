@@ -1,25 +1,13 @@
 ---
-layout: none
+layout: default
 title: LSTM(without Peephole)参数更新公式推导
 ---
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>{{ page.title }}</title>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-</script>
-<script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-</head>
-<body>
 
 <h2>{{ page.title }}</h2>
 
 <div>
+{% raw %} {{
 
 <br>
 <p>&nbsp;&nbsp;LSTM是一种结构被精心设计过的一种RNN，它的参数更新和普通的BP算法有一些区别，即所谓的truncated 
@@ -40,34 +28,34 @@ back propagation，相关论文里公式推导的不是特别详细会跳过一�
 <br>
 <p>ceil input 部分</p>
 
-$$z_{{c_j}}(t) = \sum_m{w_{{c_j}m}y_m(t-1)}$$ 
-<p>其中$c_j$表示，memory ceil的第j维，t代表RNN中的时刻$w_{{c_j}m}$表示y(t-1)的第m维连接memory ceil的第j维的权重</p>
+$$z_{ {c_j}}(t) = \sum_m{w_{ {c_j}m}y_m(t-1)}$$ 
+<p>其中$c_j$表示，memory ceil的第j维，t代表RNN中的时刻$w_{ {c_j}m}$表示y(t-1)的第m维连接memory ceil的第j维的权重</p>
 <br>
 
 <p>input gate部分</p>
 
-$$y_{in_j}(t) = f_{in_j}(z_{in_j}(t)),\qquad	z_{in_j}(t) = \sum_m{w_{{in_j}m}y_m(t-1)}$$
+$$y_{in_j}(t) = f_{in_j}(z_{in_j}(t)),\qquad	z_{in_j}(t) = \sum_m{w_{ {in_j}m}y_m(t-1)}$$
 <br>
 
 <p>forget gate部分</p>
 
-$$y_{\varphi_j}(t) = f_{\varphi_j}(z_{\varphi_j}(t)),\qquad	z_{\varphi_j}(t) = \sum_m{w_{{\varphi_j}m}y_m(t-1)}$$
+$$y_{\varphi_j}(t) = f_{\varphi_j}(z_{\varphi_j}(t)),\qquad	z_{\varphi_j}(t) = \sum_m{w_{ {\varphi_j}m}y_m(t-1)}$$
 <br>
 
 <p>cell state部分</p>
 
-$$s_{c_j}(t) = y_{\varphi_j}(t)s_{c_j}(t-1) + y_{in_j}(t)g(z_{{c_j}}(t)),\qquad s_{c_j}(0)=0$$
+$$s_{c_j}(t) = y_{\varphi_j}(t)s_{c_j}(t-1) + y_{in_j}(t)g(z_{ {c_j}}(t)),\qquad s_{c_j}(0)=0$$
 
 <br>
 
 <p>output gate部分</p>
 
-$$y_{out_j}(t) = f_{out_j}(z_{out_j}(t)),\qquad	z_{out_j}(t) = \sum_m{w_{{out_j}m}y_m(t-1)}$$
+$$y_{out_j}(t) = f_{out_j}(z_{out_j}(t)),\qquad	z_{out_j}(t) = \sum_m{w_{ {out_j}m}y_m(t-1)}$$
 
 <br>
 <p>上面提到的是LSTM的memory ceil的部分，相当于神经网络的hidden unit，没有谈到输入层和输出层。关于输入层x，以上公式无需特殊变动，
 只需要把x并入y(t-1)即可，即$y(t-1) = < y(t-1),x > $ 公式不需要做额外变动，对于输出层需要在隐含层的基础上添加额外的一层：</p>
-$$y_{k}(t) = f_{k}(z_{k}(t)),\qquad	z_{k}(t) = \sum_m{w_{{k}m}y_m(t-1)}$$
+$$y_{k}(t) = f_{k}(z_{k}(t)),\qquad	z_{k}(t) = \sum_m{w_{ {k}m}y_m(t-1)}$$
 <br>
 
 <p>&nbsp;&nbsp;forward pass可以看到和普通的神经网络并无特别，只是隐含层设置的精巧罢了。在参数更新的时候，LSTM采用的是truncated 
@@ -183,7 +171,6 @@ var duoshuoQuery = {short_name:"luoleicn"};
 	</script>
 <!-- 多说公共JS代码 end -->
 
+}} {% endraw %}
 
 </div>
-</body>
-</html>
