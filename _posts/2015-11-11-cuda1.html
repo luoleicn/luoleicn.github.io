@@ -1,0 +1,105 @@
+---
+layout: default
+title: cuda内存一二
+---
+
+<div>
+	<div align="center"><h2>{{ page.title }}</h2></div>
+	<h3>cuda内存组成</h3>
+	<p>&nbsp;&nbsp;CUDA的全称是Compute Unified Device Architecture，是NVIDIA公司的提出来的并行计算架构，主要是利用GPU的众核（我的GTX980显卡，
+	有2000+个cuda核心）计算能力，来提高计算性能。进一步的说是在GPU上提供标准C编程语言，为在支持CUDA的NVIDIA GPU上进行并行计算而提供了统一
+	的软硬件解决方案。本文主要介绍cuda基本的内存模型，为编写GPU程序提供基础。关于术语的声明，将不区分cpu和host（都是指中央处理器），
+	gpu和device（都是指图形处理器）。</p>
+	<br>
+	
+	<p>&nbsp;&nbsp;首先看一下CUDA的布局，如下图所示：</p>
+	<div align="center"><img src="http://luoleicn.github.io/blog/source/images/CUDA-memory-model.gif"  alt="cuda" /></div>
+	<p>其中的红色部分是所谓的on-chip内存，可以类比于CPU的cache，访问起来非常迅速；而橙色部分是所谓的off-chip内存，也就是所谓的GPU的显存，空间
+	相对于cache要大得多（GTX980有4G的显存）。从图中可以注意到橙色部分的Global Memory、Constant Memory、Texture Memory不仅可以被GPU所操作（Global Memory
+	可读写，Constant Memory和Texture Memory只读），也可以被CPU所操作（Global Memory、Constant Memory和Texture Memory全部可以读写）。</p>
+	<br>
+	
+	<p>&nbsp;&nbsp;上面的图中不仅包含了各种Memory，也提到了几个名词Grid，Block以及Thread。这里通过软硬件来介绍一些这几个名词的含义：</p>
+	<li>Grid：由一系列Block组成，每个Grid有一整块显卡负责</li>
+	<li>Block：由一些列Thread组成，这些Thread会根据资源情况并发或者顺序的执行，每个block有一个自己的ID，block对应于硬件上，显卡由多个multiprocessors (MPs)组成，每个multiprocessor可以
+	执行一个或多个Block，但同一个Block只会属于同一个multiprocessor</li>
+	<li>Thread：负责执行具体的GPU kernel代码，每个线程有一个自己id，thread对应于硬件上，每个multiprocessor是由多个stream processors组成的，每个stream processor
+	对应一个或多个thread</li>
+	<br>
+	
+	<i>&nbsp;&nbsp;从这里也可以看到GPU和CPU的一个主要不同之处，GPU是为所谓的Throughput优化，虽然每个核心无法和CPU的核心相提并论，但GPU由
+	非常多的核心数组成，使得其可以轻松处理大量计算密集（对cache大小要求低，逻辑复杂度不高）的线程并发执行。</i>
+	<br>
+	
+	<p>&nbsp;&nbsp;下面依次介绍CUDA里面的几种内存：</p>
+	<p>&nbsp;&nbsp;最基本的是Global Memory，它最为通用（允许CPU和GPU的读写操作），速度也最慢，Global Memory之于GPU可以类比于内存之于GPU，只不过
+	Global Memory的压力要比供CPU使用的内存大的多，因为cuda程序动辄成百
+	上千个线程在运行，如果大家都在Global Memory上进行读取，相比于普通内存需要Global Memory的吞吐能力大的多，可以对比一下我的设备的显存和内存指标
+	GTX980的显存是GDDR5，频率7000MHz，位宽256bit，我的内存是DDR3，频率1600MHz，位宽64bit。值得一提的是在Compute capability 2.0以上的版本GPU也会像CPU一样对内存
+	进行cache，减少直接访问Global Memory的次数。</p>
+	
+	<p>&nbsp;&nbsp;Constant Memory是比较特殊的一种内存，它的大小很小（GTX980上只有64K），它对于Kernel程序来说是只读的，它设计的目的是为了
+	解决前面提到的成百上千个线程读取显存造成的读取带宽瓶颈。在谈到Constant Memory如何解决内存带宽问题这个问题时，必须先了解一个cuda
+	架构里的概念“warp”，1个warp包括32个线程，在程序运行时，这组线程像是被捆绑了一样，都在执行同一条指令，只不过每个线程自己操作的数据可能不同罢了。
+	在某一个线程读取了Constant Memory中的内容后，这次读取的结果会通知到半个warp中的线程，即一次读取会有16个线程感知到这个结果，如果除了主动
+	发起读指令的线程外，其他15个线程中的一些或全部也需要读取这部分数据，那么就可以大幅减少重复的读取对带宽的浪费，除此之外Constant Memory里的
+	内容还会被GPU主动cache到自己的寄存器里，可以进一步减少对内存的访问。同时也可以发现Constant Memory是一把双刃剑，如果不同线程需要不同的数据
+	那么这种访问方式其实是更慢的访问内存方法，造成了无谓的通知半个warp的线程的浪费，考虑Constant Memory是稀缺的资源，更应该把Constant Memory留给
+	真正需要使用这种机制的数据块。</p>
+	
+	<p>&nbsp;&nbsp;Texture Memory和Constant Memory有一些相似之处，它也是只读的，它存在的目的也是为了减少显存读取的带宽压力，它的优化机制是针对数据
+	访问的局部性原理，把需要访问的数据的局部数据都缓存到寄存器中，增加cache命中率，降低显存压力。</p>
+	
+	<p>&nbsp;&nbsp;local Memory是指线程内部申请的临时变量，生命周期仅限于kernel程序内部，GPU会考虑将local Memory里的数据cache到寄存器中。</p>
+	
+	<p>&nbsp;&nbsp;Shared Memory是比较特殊的一种内存，它是所谓的on-chip memory，读写速度很快，当GPU程序运行时，Shared Memory中的数据会被拷贝到每一个
+	Block中，各个Block中的Shared Memory互相不可见不影响，在同一个Block中，Shared Memory中的数据对这个Block中的线程是可见的，Shared Memory提供了一种
+	方式可以方便的让同一个Block中的线程相互通信和合作。</p>
+	<br>
+	<br>
+	
+	<h3>page-locked内存</h3>
+	<p>&nbsp;&nbsp;cudaHostAlloc是cuda c提供的在host端申请内存的方法，和malloc申请内存不同之处在于，cudaHostAlloc申请的内存是page-locked memory
+	（或pinned memory），page-locked memory的特殊属性是它不会被操作系统换出到虚拟内存（硬盘）中，它会常驻在物理内存中，这样device拿到host的物
+	理内存地址进行内存交换就会保证安全（这个物理内存地址不会被OS换成别的内容），因为device和host进行内存交互的时候是走的DMA，DMA进行数据交
+	互时并不需要CPU的介入，而此时如果内存不是page-locked，cpu就有可能正在执行内存换入换出操作，导致数据读取错误。事实上由于DMA这种性质的存在，
+	即使不是通过cudaHostAlloc申请的内存，再想和数据库进行交互时为了保证安全性，所以必须通过两步来实现，第一步把数据从pageable memory拷贝
+	到page-locked memory，然后再通过DMA和device进行交互，因此这种普通的方式数据传输速度受到前端总线速度和PCIE速度较低的那个速度影响。虽然
+	page-locked的内存很好，但如果盲目使用page-locked内存会导致系统更快outOfMemory，而且会影响其他进程的内存使用。</p>
+	<br>
+	<br>
+	
+	<h3>zero-copy内存</h3>
+	<p>&nbsp;&nbsp;CUDA提供了一种zero-copy技术，即在host上申请一块内存（page-locked），在GPU上可以通过所谓的Unified Virtual Addressing方法拿到
+	指向host内存的指针，这种方式不用再把数据拷贝到device上变可以直接访问，这种方式不适合频繁的数据访问，因为它要走PCI-E来访问数据，另外这种
+	数据访问方式对多个GPU编程交互提供了便利。</p>
+	<br>
+	<br>
+	
+	<h3>unified memory</h3>
+	<p>&nbsp;&nbsp;unified Memory是一项新的技术，只在CUDA 6以上，Compute Capability 3.0以上，才提供支持。它和zero-copy的目的是一样的，统一了内存
+	模型，即一块内存可以被host和device进行直接的读写，避免掉了开发者显示调用cudaMemcpy在host和device上来回拷贝数据，简化了编程接口。但unified 
+	memory和zero-copy memory实现思路不同，zero-copy的方式比较直观，即内存放在host上，通过一些技术保证device和host的共同直接访问性质，而unified
+	memory思路不同，它是一种封装的解决方案，它会根据需要动态在host的内存和device的显存上面拷贝数据，对开发者是透明的，当device需要访问数据时，很
+	可能数据已经被unified memory技术拷贝到了显存上，程序只需读显存即可，避免了PCI-E访问host内存延时的问题，这项技术相当于把不同设备的内存的管理
+	统一交给CUDA来自动完成，留给了CUDA很多为我们自动优化的可能性（比如数据从host预取到device，根据数据的局部性原理把数据拷贝的device等），它虽然
+	不会比精心设计的利用CUDA的streams的overlap加速效果好，但至少给我提供了更简单的、优化的还不赖的一种统一内存管理方式。</p>
+	
+	<!-- 多说评论框 start -->
+<div class="ds-thread" data-thread-key="luoleicn" data-title="cuda内存一二" data-url="http://luoleicn.github.io/blog/2015/11/11/cuda1.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"luoleicn"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+</div>
+
