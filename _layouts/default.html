@@ -2,63 +2,22 @@
 <html>
 <head>
 <style>
-@media screen and (max-width:750px)
-{
-    html{
-        font-size:10px; /*满屏按照10px来算*/
-    } 
+body {
+	font: normal 100% Helvetica, Arial, sans-serif;
 }
-@media screen and (max-width:675px)
-{
-
-    html{
-        font-size:9px; /*屏幕等于设计的 9/10, 标准尺寸也缩小到9/10  */
-    } 
-}
-@media screen and (max-width:600px)
-{
-    html{
-        font-size:8px;/*屏幕等于设计的 8/10, 标准尺寸也缩小到8/10  */
-    } 
-}
-@media screen and (max-width:525px)
-{
-    html{
-        font-size:7px;/*屏幕等于设计的 7/10, 标准尺寸也缩小到7/10  */
-    } 
-}
-@media screen and (max-width:450px)
-{
-    html{
-        font-size:6px; 
-    } 
-}
-@media screen and (max-width:375px)
-{
-    html{
-        font-size:5px;
-    } 
-}
-@media screen and (max-width:300px)
-{
-    html{
-        font-size:4px;
-    } 
+.main {
+	float: right;
+	width: 70%; 
 }
 
-
-.am-container {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left:  0rem; 
-    padding-right: 0rem; 
-    width: 100%; 
-    max-width:75rem;
+.leftBar {
+	float: left;
+	width: 25%;
 }
+img { max-width: 100%;}
+
 </style>
-<meta name="viewport" content="width=750, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>{{ page.title }}</title>
 </head>
