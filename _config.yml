@@ -1,5 +1,5 @@
 name: Luo Lei's Blog
-url: luoleicn.github.io
+#url: luoleicn.github.io
 baseurl: ""
 
 # Dependencies
@@ -15,4 +15,6 @@ paginate:         1
 version:          1.0.0
 
 github:
-  repo:           github.com/luoleicn/blog
+  repo:           github.com/luoleicn/luoleicn.github.io
+safe: false
+sitemapurl: "http://luoleicn.github.io"
