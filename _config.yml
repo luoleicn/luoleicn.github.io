@@ -1,4 +1,18 @@
 name: Luo Lei's Blog
-#url: http://luoleicn.github.io
-url: ""
+url: luoleicn.github.io
 baseurl: ""
+
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+paginate:         1
+
+# Custom vars
+version:          1.0.0
+
+github:
+  repo:           github.com/luoleicn/blog
