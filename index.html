@@ -6,10 +6,10 @@ title: 博客首页
 
 <h2>{{ page.title }}</h2>
 
-<p><a href="./about.html">关于我</a>&nbsp;&nbsp;<a href="http://luoleicn.github.io/blog/feed.xml">rss</a></p>
+<p><a href="http://luoleicn.github.io/aboutme.html">关于我</a>&nbsp;&nbsp;<a href="http://luoleicn.github.io/feed.xml">rss</a></p>
 <p>recent posts</p>
 <ul>
-{% for post in site.posts reversed  %}
+{% for post in site.posts reversed %}
 <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
 </ul>
