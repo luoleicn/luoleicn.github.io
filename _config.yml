@@ -3,7 +3,7 @@ name: Luo Lei's Blog
 baseurl: ""
 
 # Dependencies
-markdown:         redcarpet
+#markdown:         redcarpet
 pygments:         true
 
 # Permalinks
