@@ -3,22 +3,39 @@ layout: none
 title: 博客首页
 ---
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<style>
+body {
+	font: normal 100% Helvetica, Arial, sans-serif;
+}
+.main {
+	float: right;
+	width: 70%; 
+}
+
+.leftBar {
+	float: left;
+	width: 25%;
+}
+img { max-width: 100%;}
+
+</style>
 <title>{{ page.title }}</title>
 </head>
+
 <body>
+
 
 <h2>{{ page.title }}</h2>
 
-<p><a href="./about.html">关于我</a>&nbsp;&nbsp;<a href="http://luoleicn.github.io/blog/feed.xml">rss</a></p>
+<p><a href="http://luoleicn.github.io/aboutme/">关于我</a>&nbsp;&nbsp;<a href="http://luoleicn.github.io/feed.xml">rss</a></p>
 <p>recent posts</p>
 <ul>
-{% for post in site.posts reversed  %}
+{% for post in site.posts reversed %}
 <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
 {% endfor %}
 </ul>
