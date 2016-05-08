@@ -1,3 +1,7 @@
+---
+layout: default
+title: 集成学习ppt
+---
 集成学习ppt
 =================
 
