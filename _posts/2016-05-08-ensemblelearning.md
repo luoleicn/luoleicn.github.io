@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: github
 title: 集成学习ppt
 ---
 集成学习ppt
