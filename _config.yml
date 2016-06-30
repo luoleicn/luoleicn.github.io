@@ -4,12 +4,15 @@ baseurl: ""
 
 # Dependencies
 #markdown:         redcarpet
-pygments:         true
+#pygments:         true
+highlighter:         true
 
 # Permalinks
 permalink:        pretty
 
 paginate:         1
+
+gems: [jekyll-paginate]
 
 # Custom vars
 version:          1.0.0
@@ -17,4 +20,5 @@ version:          1.0.0
 github:
   repo:           github.com/luoleicn/luoleicn.github.io
 safe: false
-sitemapurl: "http://luoleicn.github.io"
+#sitemapurl: "http://luoleicn.github.io"
+sitemapurl: "http://www.luolei.info"
