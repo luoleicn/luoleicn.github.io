@@ -432,7 +432,7 @@ $$\frac{\partial L}{\partial z} = \lambda z + \gamma(z-x) = 0$$</p>
 
 <p>$$ F(x) = l(x) + \phi(x) \leqslant l(x_0) + {(x-x_0)}^{T}\bigtriangledown l(x_0) + \frac{1}{2\gamma}{||x-x_0||}^{2} + \phi(x) $$</p>
 
-<p>$$ where \gamma \in (0, \frac{1}{L}] $$</p>
+<p>$$ where \quad \gamma \in (0, \frac{1}{L}] $$</p>
 
 <p>寻找可以使F(x)最小化的x，因为直接求解F(x)不容易求解，所以转为求使得F(x)上确界的最小的x，即</p>
 
@@ -441,13 +441,27 @@ $$</p>
 
 <p>凑方并增减常数项，得：</p>
 
-<p>$$x = argmin_x {(f(x) + \frac{1}{2\lambda}{||x - v ||}^2)}$$</p>
+<p>$$x = argmin_x {(f(x) + \frac{1}{2\lambda}{||x - u ||}^2)}$$</p>
+
+<p>$$ where\quad u= x_0 - \gamma\bigtriangledown l(x_0)$$</p>
 
 <p>由此可见，Proximal Aglorithm是在目标函数F不满足处处可微条件时，可以转而去优化目标函数的上界的自然结果。</p>
 
-<h3 id="Proximal.Algorithm...trust.Region">Proximal Algorithm和trust Region</h3>
+<h3 id="Proximal.Algorithm...Trust.Region">Proximal Algorithm和Trust Region</h3>
+
+<p>最小化目标函数的优化方法中，SGD的思路是，先找到目标函数的梯度方向，然后沿着梯度方向去寻找一个步长，使得在新的坐标点上目标函数值降低。除了SGD，还有一种做最优化的基本方法，是Trust Region方法，因为在实战中泰勒公式通常只展开到一阶或二阶，高阶项被丢弃，要使得被丢弃的高阶项不至于对优化造成太大影响，下一个坐标点必须不能离原坐标点距离太大，因此Trust Region先在当前坐标点附近寻找一个小的信赖区域（类比SGD中的步长），然后在这个区域内寻找使目标函数最小的坐标点。</p>
+
+<p>$$prox_{\lambda f}(v) = argmin_x {(f(x) + \frac{1}{2\lambda}{||x - v ||}^2)}$$</p>
+
+<p>Proximal Algorithm的式子里也体现着这种思想，最小化f(x)且要求新求得的x点不能和上一轮迭代得到的v点距离太远。</p>
 
 <h2 id="L......Proximal.Algorithm...ADMM">加速Proximal Algorithm和ADMM</h2>
+
+<p>最后这两个话题超过这篇小文想要介绍的范围了，以后或许会再写文章介绍这两个话题，这里只提一下。</p>
+
+<p>有不少研究是想让Proximal Algorithm更快，提高收敛速度，最简单的引入神经网络中常用的“冲量”即可以加速这个算法，其他更多改进算法需要去查阅更多资料了（PS,<a href="http://www.stat.rutgers.edu/home/tzhang/">张潼</a>老师也做相关研究）。</p>
+
+<p>使用Proximal Algorithm 求解一些lasso的问题的根本原因是Proximal Algorithm用起来很方便，求解很快。但Proximal Algorithm也不是对所有问题都是很方便的，比如它对L1这种，\(\phi(x) = \sum |x_i| \) non-overlapping的很容易求解，对于一些其他的正则项如Group lasso就没有这么方便求解了，因此又提出了Alternating Direction Method of Multipliers(ADMM)算法用来求解这种问题。</p>
 
 <h3 id="Ref">Ref</h3>
 
@@ -460,4 +474,5 @@ $$</p>
 <p>联系我：<img src="http://www.luolei.info/source/images/email.png" alt="image" /></p>
 </body>
 </html>
+
 {% endraw %}
