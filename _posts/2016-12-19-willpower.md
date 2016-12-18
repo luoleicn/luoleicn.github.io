@@ -103,5 +103,3 @@ title: 毅力和自律的培养
 比如，小时候不得不靠父母的提醒才会刷牙，但现在刷牙已经成为一种习惯，不需要消耗毅力了。
 
 
-
-联系我：![image](http://www.luolei.info/source/images/email.png)
