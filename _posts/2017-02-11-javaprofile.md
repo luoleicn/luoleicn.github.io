@@ -19,7 +19,8 @@ title: Java内存泄漏分析
 	
 	jstack pid
 
-结果如下图![image](http://www.luolei.info/source/images/jstack.jpg)
+结果如下图
+![image](http://www.luolei.info/source/images/jstack.jpg)
 
 在dump出来的java堆栈信息中没有找到线程57804的信息，于是又使用到了linux命令查线程堆栈
 	
@@ -44,6 +45,5 @@ title: Java内存泄漏分析
 定位到一个hashset对象占有4G内存，这个是不合理的，于是发现了内存泄漏的原因，修复了问题。
 
 ### Ref
-1）http://www.blogjava.net/hankchen/archive/2012/05/09/377735.html
+1）[http://www.blogjava.net/hankchen/archive/2012/05/09/377735.html](http://www.blogjava.net/hankchen/archive/2012/05/09/377735.html)
 
-联系我：![image](http://www.luolei.info/source/images/email.png)
