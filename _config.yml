@@ -24,3 +24,4 @@ safe: false
 sitemapurl: "http://www.luolei.info"
 
 theme: jekyll-theme-cayman
+gem "github-pages", group: :jekyll_plugins
