@@ -22,3 +22,5 @@ github:
 safe: false
 #sitemapurl: "http://luoleicn.github.io"
 sitemapurl: "http://www.luolei.info"
+
+theme: jekyll-theme-cayman
