@@ -97,7 +97,7 @@
 
 + 大于4：针对几乎所有的初值，系统最后都会超过区间[0,1]并且发散。
 
-![维基百科单峰映像演示图](https://wikipedia.kfd.me/v_upload/wikipedia/commons/8/8d/Logistic_map_with_parameter_from_0.02_to_4_t_from_0_to_200.gif)
+![维基百科单峰映像演示图](https://upload.wikimedia.org/wikipedia/commons/8/8d/Logistic_map_with_parameter_from_0.02_to_4_t_from_0_to_200.gif)
 
 ### 混沌和哲学问题
 
