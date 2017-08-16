@@ -45,4 +45,4 @@ luolei@ubuntu:~$ sudo docker port new_container_id
 luolei@ubuntu:~$ sudo docker rm old_container_id
 ```
 
-至此误伤完成端口切换：）
+至此无伤完成端口切换：）
