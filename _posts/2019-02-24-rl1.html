@@ -1,0 +1,890 @@
+---
+layout: github
+title: book《Reinforcement Learning : An Introduction》part I
+---
+
+{% raw %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+pre.line-numbers {
+	position: relative;
+	padding-left: 3.8em;
+	counter-reset: linenumber;
+}
+
+pre.line-numbers > code {
+	position: relative;
+}
+
+.line-numbers .line-numbers-rows {
+	position: absolute;
+	pointer-events: none;
+	top: 0;
+	font-size: 100%;
+	left: -3.8em;
+	width: 3em; /* works for line-numbers below 1000 lines */
+	letter-spacing: -1px;
+	border-right: 1px solid #999;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+	.line-numbers-rows > span {
+		pointer-events: none;
+		display: block;
+		counter-increment: linenumber;
+	}
+
+		.line-numbers-rows > span:before {
+			content: counter(linenumber);
+			color: #999;
+			display: block;
+			padding-right: 0.8em;
+			text-align: right;
+		}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">《Reinforcement Learning : An Introduction》 Part I Tabular Solution Methods</h1>
+
+<p>这本书讲的很好，比较系统，适合自学，这里只是我摘录的一些笔记，供自己翻看，内容组织很乱，这本书网上有一些按章节总结的很具体的文章如需要可以搜索，有时间的话建议读原作：）</p>
+
+<h3 id="toc_1">行为的奖励汇报增量计算：</h3>
+
+<p>\[
+Q_{n+1} = \frac{1}{n}\sum_{i=1}^{i=n}R_i \\
+        \\
+        = \frac{1}{n}(R_n + \sum_{i=1}^{i=n-1}R_i)\\
+    \\
+        = \frac{1}{n}[R_n + (n-1)\frac{1}{n-1}\sum_{i=1}^{i=n-1}R_i]\\
+        \\
+                = \frac{1}{n}[R_n + (n-1)Q_n]\\
+\\
+                = \frac{1}{n}[R_n + nQ_n - Q_n]\\
+                \\
+                = Q_n + \frac{1}{n}(R_n - Q_n)\\
+\]</p>
+
+<h4 id="toc_2">应对nonstationary环境</h4>
+
+<p>假设环境在发生变换，那么就不应该像上述描述的公式，给予每个reward相等的权重，而是给最新的reward较大的权重，</p>
+
+<p>\[
+Q_{n+1} = Q_n + \alpha(R_n - Q_n)\\
+\\
+        = \alpha R_n + (1 - \alpha)Q_n\\
+        \\
+        = \alpha R_n + (1 - \alpha)[\alpha R_{n-1} + (1-\alpha)Q_{n-1}]\\
+        \\
+        = \alpha R_n  + (1 - \alpha)\alpha R_{n-1} + (1 - \alpha)^2Q_{n-1}\\
+        \\
+        = ......\\
+        \\
+        = (1 - \alpha)^nQ_1 + \sum_{i=1}^n\alpha(1 - \alpha)^{n-i}R_i
+\]</p>
+
+<p>这种增量计算的方式在这本书里被广泛使用，可以总结为以下的范式：</p>
+
+<p>\[
+NewEstimate = OldEstimate + StepSize*[Target - OldEstimate]
+\]</p>
+
+<h3 id="toc_3">A Simple Bandit Algorithm</h3>
+
+<p><img src="http://www.luolei.info/source/images/rl/bandialgo.png" alt="a-simple-bandit-algorithm"></p>
+
+<h3 id="toc_4">马尔可夫决策过程MDP</h3>
+
+<p>MDP和bandit不同在于，bandit仅需要评价动作，因为状态是不变的，而在马尔可夫决策过程中环境和过程是需要一同来看的
+<img src="http://www.luolei.info/source/images/rl/mdp1.png" alt="mdp"></p>
+
+<h3 id="toc_5">系统奖励设计小tip</h3>
+
+<p>系统的奖励设置不是存储我们希望agent如何达成目标的先验知识的好地方，比如下棋的游戏，如果我们对吃对方的子，控制棋盘中部地区等子目标设置奖励，那么agent很可能在下棋的过程中去追求达成子目标，即使可能冒着最终失去比赛的风险，奖励设置应该只表明想要达到的最终结果，而不表明如何达到最终结果，比如下棋中间状态奖励全部设为0，只有最终胜利状态是1，最终失败状态是-1</p>
+
+<h3 id="toc_6">策略、价值、最优策略、最优价值方程</h3>
+
+<p>\[
+v_\pi(s) = E_\pi [G_t | S_t = s] = E_\pi [\sum_{k=0}^{\infty}\gamma^kR_{t+k+1} | S_t = s]\\
+\\
+q_\pi(s,a) = E_\pi [G_t | S_t = s, A_t = a] \\
+= E_\pi [\sum_{k=0}^{\infty}\gamma^kR_{t+k+1} | S_t = s, A_t = a]\\
+\\
+v_\star(s) =  \max_\pi v_\pi(s)\\
+\\
+q_\star(s,a) = \max_\pi q_\pi(s,a)\\
+\\
+v_\star(s) = \max_{a \in A(s)} q_{\pi\star}(s, a)\\
+\\
+            = \max_a E_{\pi\star} [G_t | S_t = s, A_t = a] \\
+            \\
+            = E_{\pi\star} [R_{t+1} + \gamma v_{\star}(S_{t+1})| S_t = s, A_t = a]\\
+\\
+            = \max_a \sum_{s&#39;, r}p(s&#39;,r|s,a)[r + \gamma v_\star(s&#39;)]\\
+\\
+q_\star(s,a) = E[R_{t+1} + \gamma \max_{a&#39;}q(s&#39;,a&#39;) | S_t = s, A_t = a] \\
+\\
+            = \sum_{s&#39;, r}p(s&#39;,r|s,a)[r + \gamma \max_{a&#39;}q_\star(s&#39;,a&#39;)]\\
+\]</p>
+
+<h3 id="toc_7">动态规划</h3>
+
+<h4 id="toc_8">策略评估</h4>
+
+<p>价值函数的计算可以通过递推公式进行一轮一轮的迭代更新直至收敛，需要提的一点是“in-place”计算，按照递推公式应该保留两个数组，一个数据存着当前轮的价值函数值，另一个数组存着基于上一轮价值函数计算下一轮得到新的值，依次交替计算，但实际使用中，用“in-place”的计算方式，即不额外存一个数组，直接把新的值复写老的值，这样除了更省内存之外，还会收敛的更快：</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/dp1.png" alt="image"></p>
+
+<h4 id="toc_9">策略迭代</h4>
+
+<p>假设当前有一个策略\(\pi\)和价值方程\(v_\pi\)，可以产生一个新的策略\(\pi&#39;\)，只要这个新策略基价值方程每一步都取贪心的结果，那么新策略一定是好于或等于原策略的，同时由于策略发生了变化，那么价值方程也一定发生了变化（见上述策略评估算法），会产生一个新的价值方程，然后又可以继续改进策略，依次改进直到收敛</p>
+
+<p>\[
+\pi_0 \overset{E}{\rightarrow} v_{\pi_0} \overset{I}{\rightarrow} \pi_1 \overset{E}{\rightarrow} v_{\pi_1} ...... \overset{I}{\rightarrow} \pi_\star \overset{E}{\rightarrow} v_{\pi_\star}
+\]</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/dp2.png" alt="image"></p>
+
+<p>实践中，策略迭代往往可以在比较少的轮数就拿到最优解</p>
+
+<h4 id="toc_10">价值迭代</h4>
+
+<p>策略迭代被诟病的点就是策略评估需要一些耗时，实际上这个策略评估的过程可以被截断（early-stop）并不影响收敛性，一种极端的方式是只计算一轮，这种方式就是价值迭代。</p>
+
+<p><mark>价值迭代是策略迭代的一种蜕化形式</mark></p>
+
+<p><img src="http://www.luolei.info/source/images/rl/dp3.png" alt="image"></p>
+
+<h4 id="toc_11">异步计算tips</h4>
+
+<p>上述价值迭代和策略迭代都是对所有状态的顺序扫描，异步更新的意义在于可以以任意顺序更新state的价值函数，也就是说有些state可能计算了很多遍了，另一些state可能才计算一遍，但是为了收敛性，所有的计算也都是要计算到的，异步计算的好处在于迭代初期就可以更快体现效果</p>
+
+<h3 id="toc_12">蒙特卡洛方法</h3>
+
+<p>蒙特卡洛方法不知道环境信息(对比动态规划方法)，只依赖和环境交互的返回数据进行估算，比如不知道全局一共有多少个state，那么之前的迭代优化方法就不能工作了</p>
+
+<p>蒙特卡洛方法不在step-by-step的进行更新，而是当整个episode完成之后才进行更新，更新策略是对episode产生的状态的所有reward进行平均</p>
+
+<p><mark>对比动态规划与蒙特卡洛方法</mark></p>
+
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>动态规划</th>
+<th>蒙特卡洛方法</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>环境感知</td>
+<td>已知所有的状态转移</td>
+<td>仅仅感知在episode中出现过状态转移</td>
+</tr>
+<tr>
+<td>状态转移计算</td>
+<td>仅仅涉及到一步转移</td>
+<td>当前状态一直到episode结束的所有转移</td>
+</tr>
+<tr>
+<td>状态依赖</td>
+<td>计算当前状态价值函数依赖其他状态价值函数（bootstrap）</td>
+<td>计算当前状态价值函数不依赖其他状态价值函数</td>
+</tr>
+</tbody>
+</table>
+
+<p>蒙特卡洛方法的好处：
++ 可以从与环境交互（真实、模拟）的数据学习
++ 状态价值的计算不依赖其他状态的价值，状态的价值计算彼此是独立的</p>
+
+<h4 id="toc_13">策略评估</h4>
+
+<p>对于蒙特卡洛方法来说，因为没有环境模型，所以仅仅计算状态的价值函数是不足够的，必须要把动作结合进来一起考虑</p>
+
+<p>系统没有模型信息，需要有一定能力explore各种不同状态，才能进行模型评估，这里假设每次模型评估开始都能选取一个随机状态（因为没有环境信息，所以很难，所以后面会有不做这个依赖的算法），策略评估如下：</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/mc2.png" alt="image"></p>
+
+<p>注意之前提到的策略提升相关算法在选择新策略的时候都是贪婪策略，事实上策略提升框架本身并没有严格要求新策略一定是贪婪的，其实<code>$\epsilon-greedy$</code>也是可以作为新策略的方案的（书中给出了相关证明），这样就可以让蒙特卡洛方法拥有explore的能力，不必依赖于上面的exploring starts</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/mc3.png" alt="image"></p>
+
+<p><mark>on-policy和off-policy的区别</mark></p>
+
+<p>off-policy有两种策略，behavior policy和target policy，想要计算的是target policy而和环境交互的是on-policy，理论上on-policy是off-policy的一种特殊情况，即behavior policy和target policy是同一个。off-policy通常会收敛的慢一些，而且方差会比较大。</p>
+
+<p>从上面的描述可以看出off-policy主要的需求点是从一个分布（behavior policy）中学习另一个分布（target policy），有一些常用的方法就是用来解决这个问题的，比如重要性采样（importance sampling），以下为与环境交互的一个序列的重要性采样公式：
+\[
+\rho _{t:T-1} = \frac{\Pi_{k=t}^{T-1} \pi(A_k|S_k)p(S_{k+1}|S_k, A_k)  }{\Pi_{k=t}^{T-1} b(A_k|S_k)p(S_{k+1}|S_k, A_k) }
+\]
+这样最终计算价值函数的公式为：
+\[
+v_\pi(s) = E[\rho _{t:T-1}G_t |S_t=s ]
+\]
+这个式子里期望的计算方式可以用ordinary importance sampling的方式：
+\[
+v_\pi(s) = \frac{\sum_{t\in\tau (s)}\rho _{t:T-1}G_t }{|\tau (s)|}
+\]</p>
+
+<p>也可以用weigted importance sampling的方式：
+\[
+v_\pi(s) = \frac{\sum_{t\in\tau (s)}\rho _{t:T-1}G_t }{\sum_{t\in\tau (s)}\rho _{t:T-1}}
+\]</p>
+
+<p><mark>对比ordinary importance sampling和weigted importance sampling</mark></p>
+
+<p>用ordinary importance sampling做估计通常收敛无偏估计，但是方差比较大，而weighted importance sampling则相反，通常实际使用中喜欢方差小的算法，但ordinary importance sampling还有一个优势是比较容易融合到函数近似的算法中去</p>
+
+<h5 id="toc_14">增量更新</h5>
+
+<p>ordinary importance sampling的增量更新很容易，这里写一下weighted importance sampling的增量更新方式：
+\[
+V_{n+1} = \frac{\sum_{k=1}^nW_kG_k}{\sum_{k=1}^nW_k} \\
+\\
+= V_n + \frac{W_n}{C_n} (G_n - V_n)\\
+\]
+其中
+\[
+C_{n+1} = C_n + W_{n+1}
+\]</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/mc4.png" alt="image"></p>
+
+<h4 id="toc_15"><mark>关于蒙特卡洛方法支持explore的方式小结：</mark></h4>
+
+<ul>
+<li>最前面提出了用随机起点的方式（Expoloring Start），但是这种方式要求系统对环境模型有认识，而蒙特卡洛方法是没有这个属性或者要求的</li>
+<li>用\(\epsilon-greedy\)的policy去做on-policy算法，因为引入了\(\epsilon-greedy\)所以增加了explore的可能性，不在需要第一条的假设</li>
+<li>用off-policy的方法也可以去掉第一条的假设，因为off-policy区分target policy和behavior policy，而behavior policy可以引入随机性进行探索</li>
+</ul>
+
+<h4 id="toc_16">策略优化</h4>
+
+<p>下面算法注意on-policy是off-policy的一种特殊情况</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/mc5.png" alt="image"></p>
+
+<h3 id="toc_17"><mark>总结蒙特卡洛方法对比动态规划方法</mark></h3>
+
+<ul>
+<li>蒙特卡洛方法不要求有环境模型，动态规划必须要有</li>
+<li>蒙特卡洛方法可以利用agent和环境交互产生的数据集，这些数据集的获取通常是很便宜的</li>
+<li>蒙特卡洛方法会把主要的计算量放在重点的状态上，而不是像动态规划方法那样每轮迭代都要过一遍所有状态</li>
+<li>蒙特卡洛计算一个状态的价值时候，不依赖于其他状态，这样就不会引入其他状态估计不准确带来的偏差，也即蒙特卡洛方法不做bootstrap</li>
+</ul>
+
+<h3 id="toc_18">时序差分方法（Temporal-Difference Learning）</h3>
+
+<p><mark>时序差分方法是一种综合蒙特卡洛方法和动态规划方法的一种方法，它像蒙特卡洛方法那样不需要环境模型，使用和环境的交互数据进行评估，同时它又像动态规划方法一样可以尽快更新参数模型，而不需要像蒙特卡洛方法那样等到最终的结果才进行估计</mark></p>
+
+<p>时序差分方法不需要像蒙特卡洛方法一样等到最终结果才能更新价值函数，这里对比一下两种方法的更新公式，蒙特卡洛必须要等到最后是因为只有到最后\(G_t\)才能确定，而时序差分选择用\(R_{t+1} + \gamma V(s+1)\)来替代这个值</p>
+
+<p>\[
+V(s) = V(s) + \alpha[G_t - V(s)]\\
+\\
+V(s) = V(s) + \alpha[R_{t+1} + \gamma V(s+1) - V(s)]
+\]</p>
+
+<p>来自知乎的评价MC和TD <a href="https://www.zhihu.com/question/62388365">https://www.zhihu.com/question/62388365</a> 认为MC更适合学习很长期的任务如围棋，TD更适合短期的如维持倒立摆的平稳。</p>
+
+<p>一个例子对比TD和MC，给定如下几个序列，每个序列以<state, action>对的形式给出：
+<img src="http://www.luolei.info/source/images/rl/td2.png" alt="image"></p>
+
+<p>这个例子中对状态A的价值评估，两种算法不同：</p>
+
+<p>MC：从A出发所有的最终奖励都是0，所以A状态的价值就是0</p>
+
+<p>TD：从A出发是100%到达B的，B的价值是0.75，所以A的价值也是0.75</p>
+
+<p>这样看，MC的目标是最小化训练数据误差，而TD看重的是马尔可夫过程的最大似然</p>
+
+<h4 id="toc_19">策略评估</h4>
+
+<p>TD(0)</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td1.png" alt="image"></p>
+
+<p>TD(n)</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td6.png" alt="image"></p>
+
+<h4 id="toc_20">策略优化</h4>
+
+<p>Sarsa（State–action–reward–state–action）</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td3.png" alt="image"></p>
+
+<p>Q-learning(off-policy)</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td4.png" alt="image"></p>
+
+<p>一个例子对比Sarsa和Q-learning：</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td5.png" alt="image"></p>
+
+<p>在这个经过悬崖的路径规划过程中，Sarsa会选择最安全的路线（因为它是期望的方式计算价值），而Q-learning会选择最短的路线规划（因为它的策略是选max的）</p>
+
+<p>Expected Sarsa:</p>
+
+<p>对Sarsa更新时候做一个小变化取期望而不是sampling，注意这时expected需要另一个behavior policy所以实际上expected sarsa属于q-learning</p>
+
+<p>\[
+Q(S, A) = Q(S, A) + \alpha[R + \gamma E[Q(S&#39;,A&#39;) |S&#39;] - Q(S,A)]\\
+\\
+= Q(S, A) + \alpha[R + \gamma \sum_a \pi(a|S&#39;) Q(S&#39;,A&#39;) - Q(S,A)]
+\]</p>
+
+<p>如此修改带来的好处是：
++ Expected Sarsa的步长即使设置为1，也是可以保证收敛的，而不像Sarsa要求步长设置的很小
++ Expected Sarsa需要的数据集的量比Sarsa也要小，因为Sarsa是依靠一定的随机性，而Expected Sarsa是靠期望，因此Expected Sarsa收敛的也更快</p>
+
+<p>n-step Sarsa:</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td7.png" alt="image"></p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td8.png" alt="image"></p>
+
+<p>n-steps Q-learning(off-policy)</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td9.png" alt="image"></p>
+
+<p>n-steps Q-learning without importance sampling</p>
+
+<p>使用importance sampling的原因和蒙特卡洛方法一样，都是没有穷尽在每个状态下的所有可能，在时序差分里可以通过对未探索的状态使用估计值来替代：</p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td10.png" alt="image"></p>
+
+<p><img src="http://www.luolei.info/source/images/rl/td11.png" alt="image"></p>
+
+<h3 id="toc_21">Dyna-Q 统一model-learning和model-free的方法</h3>
+
+<p><img src="http://www.luolei.info/source/images/rl/dynaq1.png" alt="image"></p>
+
+<p><img src="http://www.luolei.info/source/images/rl/dynaq2.png" alt="image"></p>
+
+<h3 id="toc_22">启发式搜索</h3>
+
+<p>系统建立的价值函数v或者状态-动作函数q都是一种估计，不能保证是完美的估计，如果这两个函数是完美的，那么agent在应用时只需要看一下当前步骤的最优选择即可，但因为是不完美的，所以agent进行更深更广的探索后选出的行为通常会更好。</p>
+
+<h4 id="toc_23">rollout policy</h4>
+
+<p>在决策阶段rollout policy采取类似蒙特卡洛的方法对每个状态的结果求平均，认为是这个状态的最终值</p>
+
+<h4 id="toc_24">MCTS</h4>
+
+<p>蒙特卡洛树搜索是一种rollout policy的特殊形式，它强调在高价值的路径上多进行一些尝试（因为决策时间有限，希望把时间放在有价值的搜索区域）</p>
+
+<h3 id="toc_25"><mark>上述集中算法对比图</mark></h3>
+
+<p><img src="http://www.luolei.info/source/images/rl/backup1.png" alt="image"></p>
+
+<p><img src="http://www.luolei.info/source/images/rl/backup2.png" alt="image"></p>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+!function(){"undefined"!=typeof self&&self.Prism&&self.document&&Prism.hooks.add("complete",function(e){if(e.code){var t=e.element.parentNode,s=/\s*\bline-numbers\b\s*/;if(t&&/pre/i.test(t.nodeName)&&(s.test(t.className)||s.test(e.element.className))&&!e.element.querySelector(".line-numbers-rows")){s.test(e.element.className)&&(e.element.className=e.element.className.replace(s,"")),s.test(t.className)||(t.className+=" line-numbers");var n,a=e.code.match(/\n(?!$)/g),l=a?a.length+1:1,m=new Array(l+1);m=m.join("<span></span>"),n=document.createElement("span"),n.className="line-numbers-rows",n.innerHTML=m,t.hasAttribute("data-start")&&(t.style.counterReset="linenumber "+(parseInt(t.getAttribute("data-start"),10)-1)),e.element.appendChild(n)}}})}();
+</script>
+
+<script type="text/x-mathjax-config">
+(function () {
+
+MathJax.Hub.Config({
+	'showProcessingMessages': false,
+	'messageStyle': 'none'
+});
+
+if (typeof MathJaxListener !== 'undefined') {
+	MathJax.Hub.Register.StartupHook('End', function () {
+		MathJaxListener.invokeCallbackForKey_('End');
+	});
+}
+
+})();
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+</html>
+{% endraw %}
