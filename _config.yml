@@ -5,7 +5,8 @@ baseurl: ""
 # Dependencies
 #markdown:         redcarpet
 #pygments:         true
-highlighter:         true
+#highlighter:         true
+rouge:         true
 
 # Permalinks
 permalink:        pretty
