@@ -21,8 +21,8 @@ version:          1.0.0
 github:
   repo:           github.com/luoleicn/luoleicn.github.io
 safe: false
-#sitemapurl: "http://luoleicn.github.io"
-sitemapurl: "http://www.luolei.info"
+sitemapurl: "http://luoleicn.github.io"
+#sitemapurl: "http://www.luolei.info"
 
 theme: jekyll-theme-cayman
 gem "github-pages", group: :jekyll_plugins
