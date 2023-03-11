@@ -6,7 +6,7 @@
 
 B-tree可以理解为一个机器学习概念中的“模型”，它的输入是索引的key，返回是索引key对应的数据存放位置。数据库使用B-tree作为索引时，为了减少索引数据量，不是针对每个key都进行了索引，而是把待索引的数据排好序，每n个key值取一个建立索引，这样既可以减少索引数据量，而且搜索索引时实际要找的值位置与搜到的结果之间不会偏离太远，这样B-tree模型与机器学习中的回归树模型看起来就很相似了，两者都是尽力拟合数据，但还是可能会有一定的误差范围，两者的类比如下图：
 
-![image](http://www.luolei.info/source/images/index1.jpg)
+![image](http://www.luolei.site/source/images/index1.jpg)
 
 同时在大量的数据更新或插入后，B-tree需要进行re-balance操作也可以类比于机器学习模型的re-train概念。
 
@@ -31,7 +31,7 @@ B-tree可以理解为一个机器学习概念中的“模型”，它的输入�
 
 
 
-![image](http://www.luolei.info/source/images/index2.jpg)
+![image](http://www.luolei.site/source/images/index2.jpg)
 
 定义模型为\\(f(x)\\)，\\(x\\)为索引值，\\(y \in [0, N)\\)表示数据位置，\\(M_l\\)表示stage \\(l\\)层的模型，\\(f_l^{(k)}(x)\\)表示stage \\(l\\)层的第k哥模型。
 
@@ -45,12 +45,12 @@ $$ L_l = \sum_{(x,y)}(f_l^{\lfloor M_l f_{l-1}(x)/N \rfloor}(x) - y)^2 $$
 
 基于stage这种特性，可以设置混合模型来更好的对数据建模，第一层需要比较复杂的表达能力，更适合选择神经网络来建模，下面的层使用线性回归来避免过长的计算时间，为了彻底根治“最后一公里”的问题，如果最底层模型的误差的界比较大，就再用B-tree来控制误差范围，具体模型训练算法如下：
 
-![image](http://www.luolei.info/source/images/index3.jpg)
+![image](http://www.luolei.site/source/images/index3.jpg)
 
 
 实验结果如下图：
 
-![image](http://www.luolei.info/source/images/index4.jpg)
+![image](http://www.luolei.site/source/images/index4.jpg)
 
 
 ### 个人感受

@@ -13,20 +13,20 @@ title: Java内存泄漏分析
 
 
 结果如下图
-![image](http://www.luolei.info/source/images/ps.jpg)
+![image](http://www.luolei.site/source/images/ps.jpg)
 
 发现有很多线程都没有占用cpu，而有一些线程很相似，如线程57804，都占用了相同的cpu，接着用jstack去dump下线程的堆栈
 	
 	jstack pid
 
 结果如下图
-![image](http://www.luolei.info/source/images/jstack.jpg)
+![image](http://www.luolei.site/source/images/jstack.jpg)
 
 在dump出来的java堆栈信息中没有找到线程57804的信息，于是又使用到了linux命令查线程堆栈
 	
 	pstack pid
 
-结果如下图![image](http://www.luolei.info/source/images/pstack.jpg)
+结果如下图![image](http://www.luolei.site/source/images/pstack.jpg)
 
 这回找到线程57804，果然跟设想的一样，是因为内存占用太高，导致系统在不停的执行垃圾回收，导致系统性能很低，应该是哪里的代码有问题，导致了内存泄漏。于是用jmap尝试把内存信息dump出来
 
@@ -36,11 +36,11 @@ title: Java内存泄漏分析
 
 接下来用[Eclipse Memory Analyzer](http://www.eclipse.org/mat/) 分析内存文件，可以看到有4G的大对象：
 
-![image](http://www.luolei.info/source/images/jprofile1.jpg)
+![image](http://www.luolei.site/source/images/jprofile1.jpg)
 
 点击对象进行分析：
 
-![image](http://www.luolei.info/source/images/jprofile2.jpg)
+![image](http://www.luolei.site/source/images/jprofile2.jpg)
 
 定位到一个hashset对象占有4G内存，这个是不合理的，于是发现了内存泄漏的原因，修复了问题。
 

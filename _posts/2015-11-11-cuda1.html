@@ -13,7 +13,7 @@ title: cuda内存一二
 	<br>
 	
 	<p>&nbsp;&nbsp;首先看一下CUDA的布局，如下图所示：</p>
-	<div align="center"><img src="http://www.luolei.info/source/images/CUDA-memory-model.gif"  alt="cuda" /></div>
+	<div align="center"><img src="http://www.luolei.site/source/images/CUDA-memory-model.gif"  alt="cuda" /></div>
 	<p>其中的红色部分是所谓的on-chip内存，可以类比于CPU的cache，访问起来非常迅速；而橙色部分是所谓的off-chip内存，也就是所谓的GPU的显存，空间
 	相对于cache要大得多（GTX980有4G的显存）。从图中可以注意到橙色部分的Global Memory、Constant Memory、Texture Memory不仅可以被GPU所操作（Global Memory
 	可读写，Constant Memory和Texture Memory只读），也可以被CPU所操作（Global Memory、Constant Memory和Texture Memory全部可以读写）。</p>

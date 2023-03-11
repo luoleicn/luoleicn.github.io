@@ -59,7 +59,7 @@ $$prox_{\lambda f}(v) = argmin_x {(f(x) + \frac{1}{2\lambda}{||x - v ||}^2)}$$
 
 从上面这个式子可以看出，上式是在寻找一个距离v点不要太远的一个x，使得f(x)尽可能小，显然\\(f(x) <= f(v)\\)。
 
-![image](http://www.luolei.info/source/images/prox1.jpg)
+![image](http://www.luolei.site/source/images/prox1.jpg)
 
 图片来自《Proximal Algorithms in Statistics and Machine Learning》^2，这张图形象的表示了上面式子的几何意义，其中加粗的黑线表示作用域，浅色的黑线表示函数f的等高线，蓝色的点对应上面式子的v点，红色点表示最终求得的x点。
 
@@ -141,4 +141,4 @@ Proximal Algorithm的式子里也体现着这种思想，最小化f(x)且要求�
 
 3 [《Proximal Algorithms》](http://web.stanford.edu/~boyd/papers/pdf/prox_algs.pdf) Neal Parikh,Stephen Boyd 
 
-联系我：![image](http://www.luolei.info/source/images/email.png)
+联系我：![image](http://www.luolei.site/source/images/email.png)

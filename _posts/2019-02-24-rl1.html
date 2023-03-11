@@ -563,12 +563,12 @@ NewEstimate = OldEstimate + StepSize*[Target - OldEstimate]
 
 <h3 id="toc_3">A Simple Bandit Algorithm</h3>
 
-<p><img src="http://www.luolei.info/source/images/rl/bandialgo.png" alt="a-simple-bandit-algorithm"></p>
+<p><img src="http://www.luolei.site/source/images/rl/bandialgo.png" alt="a-simple-bandit-algorithm"></p>
 
 <h3 id="toc_4">马尔可夫决策过程MDP</h3>
 
 <p>MDP和bandit不同在于，bandit仅需要评价动作，因为状态是不变的，而在马尔可夫决策过程中环境和过程是需要一同来看的
-<img src="http://www.luolei.info/source/images/rl/mdp1.png" alt="mdp"></p>
+<img src="http://www.luolei.site/source/images/rl/mdp1.png" alt="mdp"></p>
 
 <h3 id="toc_5">系统奖励设计小tip</h3>
 
@@ -605,7 +605,7 @@ q_\star(s,a) = E[R_{t+1} + \gamma \max_{a&#39;}q(s&#39;,a&#39;) | S_t = s, A_t =
 
 <p>价值函数的计算可以通过递推公式进行一轮一轮的迭代更新直至收敛，需要提的一点是“in-place”计算，按照递推公式应该保留两个数组，一个数据存着当前轮的价值函数值，另一个数组存着基于上一轮价值函数计算下一轮得到新的值，依次交替计算，但实际使用中，用“in-place”的计算方式，即不额外存一个数组，直接把新的值复写老的值，这样除了更省内存之外，还会收敛的更快：</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/dp1.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/dp1.png" alt="image"></p>
 
 <h4 id="toc_9">策略迭代</h4>
 
@@ -615,7 +615,7 @@ q_\star(s,a) = E[R_{t+1} + \gamma \max_{a&#39;}q(s&#39;,a&#39;) | S_t = s, A_t =
 \pi_0 \overset{E}{\rightarrow} v_{\pi_0} \overset{I}{\rightarrow} \pi_1 \overset{E}{\rightarrow} v_{\pi_1} ...... \overset{I}{\rightarrow} \pi_\star \overset{E}{\rightarrow} v_{\pi_\star}
 \]</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/dp2.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/dp2.png" alt="image"></p>
 
 <p>实践中，策略迭代往往可以在比较少的轮数就拿到最优解</p>
 
@@ -625,7 +625,7 @@ q_\star(s,a) = E[R_{t+1} + \gamma \max_{a&#39;}q(s&#39;,a&#39;) | S_t = s, A_t =
 
 <p><mark>价值迭代是策略迭代的一种蜕化形式</mark></p>
 
-<p><img src="http://www.luolei.info/source/images/rl/dp3.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/dp3.png" alt="image"></p>
 
 <h4 id="toc_11">异步计算tips</h4>
 
@@ -677,11 +677,11 @@ q_\star(s,a) = E[R_{t+1} + \gamma \max_{a&#39;}q(s&#39;,a&#39;) | S_t = s, A_t =
 
 <p>系统没有模型信息，需要有一定能力explore各种不同状态，才能进行模型评估，这里假设每次模型评估开始都能选取一个随机状态（因为没有环境信息，所以很难，所以后面会有不做这个依赖的算法），策略评估如下：</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/mc2.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/mc2.png" alt="image"></p>
 
 <p>注意之前提到的策略提升相关算法在选择新策略的时候都是贪婪策略，事实上策略提升框架本身并没有严格要求新策略一定是贪婪的，其实<code>$\epsilon-greedy$</code>也是可以作为新策略的方案的（书中给出了相关证明），这样就可以让蒙特卡洛方法拥有explore的能力，不必依赖于上面的exploring starts</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/mc3.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/mc3.png" alt="image"></p>
 
 <p><mark>on-policy和off-policy的区别</mark></p>
 
@@ -722,7 +722,7 @@ V_{n+1} = \frac{\sum_{k=1}^nW_kG_k}{\sum_{k=1}^nW_k} \\
 C_{n+1} = C_n + W_{n+1}
 \]</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/mc4.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/mc4.png" alt="image"></p>
 
 <h4 id="toc_15"><mark>关于蒙特卡洛方法支持explore的方式小结：</mark></h4>
 
@@ -736,7 +736,7 @@ C_{n+1} = C_n + W_{n+1}
 
 <p>下面算法注意on-policy是off-policy的一种特殊情况</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/mc5.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/mc5.png" alt="image"></p>
 
 <h3 id="toc_17"><mark>总结蒙特卡洛方法对比动态规划方法</mark></h3>
 
@@ -762,7 +762,7 @@ V(s) = V(s) + \alpha[R_{t+1} + \gamma V(s+1) - V(s)]
 <p>来自知乎的评价MC和TD <a href="https://www.zhihu.com/question/62388365">https://www.zhihu.com/question/62388365</a> 认为MC更适合学习很长期的任务如围棋，TD更适合短期的如维持倒立摆的平稳。</p>
 
 <p>一个例子对比TD和MC，给定如下几个序列，每个序列以<state, action>对的形式给出：
-<img src="http://www.luolei.info/source/images/rl/td2.png" alt="image"></p>
+<img src="http://www.luolei.site/source/images/rl/td2.png" alt="image"></p>
 
 <p>这个例子中对状态A的价值评估，两种算法不同：</p>
 
@@ -776,25 +776,25 @@ V(s) = V(s) + \alpha[R_{t+1} + \gamma V(s+1) - V(s)]
 
 <p>TD(0)</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td1.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td1.png" alt="image"></p>
 
 <p>TD(n)</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td6.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td6.png" alt="image"></p>
 
 <h4 id="toc_20">策略优化</h4>
 
 <p>Sarsa（State–action–reward–state–action）</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td3.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td3.png" alt="image"></p>
 
 <p>Q-learning(off-policy)</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td4.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td4.png" alt="image"></p>
 
 <p>一个例子对比Sarsa和Q-learning：</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td5.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td5.png" alt="image"></p>
 
 <p>在这个经过悬崖的路径规划过程中，Sarsa会选择最安全的路线（因为它是期望的方式计算价值），而Q-learning会选择最短的路线规划（因为它的策略是选max的）</p>
 
@@ -814,27 +814,27 @@ Q(S, A) = Q(S, A) + \alpha[R + \gamma E[Q(S&#39;,A&#39;) |S&#39;] - Q(S,A)]\\
 
 <p>n-step Sarsa:</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td7.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td7.png" alt="image"></p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td8.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td8.png" alt="image"></p>
 
 <p>n-steps Q-learning(off-policy)</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td9.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td9.png" alt="image"></p>
 
 <p>n-steps Q-learning without importance sampling</p>
 
 <p>使用importance sampling的原因和蒙特卡洛方法一样，都是没有穷尽在每个状态下的所有可能，在时序差分里可以通过对未探索的状态使用估计值来替代：</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td10.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td10.png" alt="image"></p>
 
-<p><img src="http://www.luolei.info/source/images/rl/td11.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/td11.png" alt="image"></p>
 
 <h3 id="toc_21">Dyna-Q 统一model-learning和model-free的方法</h3>
 
-<p><img src="http://www.luolei.info/source/images/rl/dynaq1.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/dynaq1.png" alt="image"></p>
 
-<p><img src="http://www.luolei.info/source/images/rl/dynaq2.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/dynaq2.png" alt="image"></p>
 
 <h3 id="toc_22">启发式搜索</h3>
 
@@ -850,9 +850,9 @@ Q(S, A) = Q(S, A) + \alpha[R + \gamma E[Q(S&#39;,A&#39;) |S&#39;] - Q(S,A)]\\
 
 <h3 id="toc_25"><mark>上述集中算法对比图</mark></h3>
 
-<p><img src="http://www.luolei.info/source/images/rl/backup1.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/backup1.png" alt="image"></p>
 
-<p><img src="http://www.luolei.info/source/images/rl/backup2.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/backup2.png" alt="image"></p>
 
 
 

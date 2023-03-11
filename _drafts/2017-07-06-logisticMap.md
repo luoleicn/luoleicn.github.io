@@ -7,11 +7,11 @@
 
 当\\(R = 2\\)时，\\(x=0.01\\)时
 
-![图](http://www.luolei.info/source/images/r1.png)
+![图](http://www.luolei.site/source/images/r1.png)
 
 当\\(R = 2\\)时，\\(x=0.8\\)时
 
-![图](http://www.luolei.info/source/images/r2.png)
+![图](http://www.luolei.site/source/images/r2.png)
 
 可以多尝试一些\\(x\\)的取值，会发现无论\\(x\\)的取值是多少，最后都会收敛到0.5。收敛到的值会随着\\(R\\)变化而变化，如果把\\(R\\)值换成2.5，最终收敛的值就变成了0.6。
 
@@ -20,7 +20,7 @@
 
 并不是所有的\\(R\\)都会导致数列最终收敛到一个点上，比如\\(R = 3.1\\)时，系统不会收敛到一个固定点，而是最终在两个点上来回震荡，这种震荡现象同样也是对所有\\(x\\)都成立的。
 
-![图](http://www.luolei.info/source/images/r3.png)
+![图](http://www.luolei.site/source/images/r3.png)
 
 随着\\(R\\)的变化，一直到\\(R = 0.34\\)，都会出现在两个点上震动的现象，系统的周期为2。
 
@@ -28,7 +28,7 @@
 
 在\\(R\\)取值范围在0.34~0.35之间时，无论\\(x\\)取什么初值，系统最终都会在四个点上来回震动，系统周期变为了4。
 
-![图](http://www.luolei.info/source/images/r4.png)
+![图](http://www.luolei.site/source/images/r4.png)
 
 ### 无穷周期现象
 
@@ -67,7 +67,7 @@
 
 在有稳定周期的罗蒂斯特映射里，系统对初值是不敏感的，无论初值取什么最终都会进入到稳定的周期中。当系统的周期趋向于无穷之后，系统变得对初值敏感，而且随着\\(R\\)从3.569946变大，系统对初值变得越来越敏感，比如下图\\(R = 4, x_0=0.2\\)和\\(x_0=0. 2000000001\\)，初值只有微小的变化，两个数列会很快（约30次迭代之后）分开。
 
-![图](http://www.luolei.info/source/images/r5.png)
+![图](http://www.luolei.site/source/images/r5.png)
 
 
 

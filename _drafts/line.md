@@ -4,7 +4,7 @@
 
 两点之间直线最短是非常符合人的直觉的，但在欧氏几何中两点之间直线最短并不是以公理形式存在的，也就是说是需要证明的，本文就讨论如何证明这一点。
 
-![image](http://www.luolei.info/source/images/line.png)
+![image](http://www.luolei.site/source/images/line.png)
 
 求经过(a, \\(\alpha\\))和(b, \\(\beta\\))最短的曲线，这里只考虑平滑曲线\\(y=u(x)\\)，根据微积分和极限的基本原理，可以把曲线切分成非常短的片段，在非常短的范围里\\(\delta x \to 0\\)，可以把曲线理解为直角三角形的斜边，则曲线长度\\(s = \sqrt{ (\delta x)^2 + (\delta y)^2}\\)，所以曲线距离公式为：
 

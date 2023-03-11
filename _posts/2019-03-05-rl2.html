@@ -540,25 +540,25 @@ pre.line-numbers > code {
 
 <p>蒙特卡洛方法学习，优势是收敛性好，但是学习方差比较大，收敛速度慢</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/fv1.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/fv1.png" alt="image"></p>
 
 <p>TD方法和MC的优劣势相反，不是所有情况都收敛：</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/fv2.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/fv2.png" alt="image"></p>
 
 <p>TD(n)</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/fv3.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/fv3.png" alt="image"></p>
 
 <h3 id="toc_2">动作价值函数拟合</h3>
 
 <p>Sarsa</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/fq1.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/fq1.png" alt="image"></p>
 
 <p>n-step Sarsa</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/fq2.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/fq2.png" alt="image"></p>
 
 <h4 id="toc_3">死亡三合音</h4>
 
@@ -573,7 +573,7 @@ pre.line-numbers > code {
 
 <p>\(TD(\lambda)\)可以理解为是对n-step方法的一种融合，对多组n-step进行加权平均</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/tdlambda1.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/tdlambda1.png" alt="image"></p>
 
 <p>\[
 G^\lambda_t = (1-\lambda)\sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t:t+n} + \lambda^{T-t-1} G_t
@@ -582,11 +582,11 @@ G^\lambda_t = (1-\lambda)\sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t:t+n} + \lambda^{T
 
 <p>eligibility trace 形式上有点像优化算法里的冲量</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/tdlambda2.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/tdlambda2.png" alt="image"></p>
 
 <p>Sarsa(\lambda)</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/tdlambda3.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/tdlambda3.png" alt="image"></p>
 
 <h3 id="toc_5">policy gradient method</h3>
 
@@ -596,7 +596,7 @@ G^\lambda_t = (1-\lambda)\sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t:t+n} + \lambda^{T
 
 <h4 id="toc_6">REINFORCE</h4>
 
-<p><img src="http://www.luolei.info/source/images/rl/pgc1.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/pgc1.png" alt="image"></p>
 
 <p>其中
 \[
@@ -615,17 +615,17 @@ G^\lambda_t = (1-\lambda)\sum_{n=1}^{T-t-1} \lambda^{n-1} G_{t:t+n} + \lambda^{T
 
 <p>实际上b(s)只要是与action无关的函数即可，甚至是随机数都可以。那为什么还要引入这个b(s)呢，因为b(s)不改变参数更新的期望（引入的更新变化期望为0），同时可以通过选择合适的b(s)降低模型方差(MC方法通常方差比较大)，通常的一个做法是把对v(s,w)的建模作为b(s)进行训练</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/pgc2.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/pgc2.png" alt="image"></p>
 
 <h4 id="toc_8">Actor–Critic Methods</h4>
 
 <p>同时对policy和state-value建模，并应用于boostrapping方法（上面的REINFORCE baseline方法也同时对policy和state-value建模，但没有用于boostrapping）</p>
 
-<p><img src="http://www.luolei.info/source/images/rl/pgc3.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/pgc3.png" alt="image"></p>
 
-<p><img src="http://www.luolei.info/source/images/rl/pgc4.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/pgc4.png" alt="image"></p>
 
-<p><img src="http://www.luolei.info/source/images/rl/pgc5.png" alt="image"></p>
+<p><img src="http://www.luolei.site/source/images/rl/pgc5.png" alt="image"></p>
 
 
 

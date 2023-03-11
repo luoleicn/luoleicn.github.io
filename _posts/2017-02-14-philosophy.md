@@ -7,7 +7,7 @@ title: 哲学问题公开课期末考试
 
 浙江大学的mooc[哲学问题](http://www.icourse163.org/course/ZJU-20003#/info)是我唯一一个按照老师安排的课程进度一步步跟下来听课，参加各种小测验和作业以及最后的期末考试的一个课程（中间漏掉了一次小测验）的公开课，也如愿获得了证书：
 
-![image](http://www.luolei.info/source/images/philosophy.png)
+![image](http://www.luolei.site/source/images/philosophy.png)
 
 
 这个课很大程度上可以说是扫盲的，老师教授的比较容易理解，非常值得推荐。
